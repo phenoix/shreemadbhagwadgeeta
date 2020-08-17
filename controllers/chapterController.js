@@ -3,12 +3,25 @@ var async = require('async');
 const { body, validationResult,sanitizeBody } = require('express-validator');
 
 exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
+    async.parallel({
+        chapter_count: function(callback) {
+            Chapter.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
+        },
+    }
+    , function(err, results) {
+        res.json( results );
+    });
 };
 
 // Display list of all Chapters.
-exports.chapter_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: chapter list');
+exports.chapter_list = function(req, res, next) {
+    Chapter.find({}, 'chapter_name chapter_name_meaning chapter_number chapter_summary chapter_image')
+    .exec(function (err, list_chapters) {
+      if (err) { return next(err); }
+      //Successful, so return
+      return res.json(list_chapters);
+    });
+    
 };
 
 // Display detail page for a specific Chapter.
@@ -61,6 +74,7 @@ exports.chapter_create_post = [
                 chapter_image: req.body.chapter_image
              });
              const chapter = await newChapter.save();
+             console.log("Writing to database");
              return res.json(chapter);
             } catch (err) {
                 console.log(err.message);
