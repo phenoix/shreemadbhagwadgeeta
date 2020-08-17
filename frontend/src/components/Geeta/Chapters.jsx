@@ -1,70 +1,45 @@
-import React, { Component } from "react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ChapterCard from "./ChapterCard";
 
-class Chapters extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chapters: []
-    };
-  }
-  componentDidMount() {
-    this.fetchChapters();
-  }
+function Chapters() {
+  const [chapters, setChapters] = useState(null);
 
-  async fetchChapters() {
-    await axios
-    .get("/geeta/chapters")
-    .then(res =>{
-      this.setState({
-        chapters:res.data
-      })
-    })
-    .catch(err =>{
-      console.log("Error fetching Chapter List");
-    })
-    
-  }
-  render() {
-    const chapters=this.state.chapters;
-    console.log(chapters);
-    let chapterList;
-    if(!chapters){
-      chapterList="No Chapter Found";
-    } else {
-      chapterList=chapters.map((chapter, k) =>
-        <ChapterCard chapter={chapter} key={k} />
-      )
-    }
-    return (
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <br />
-              <h2 className="display-4 text-center">Chapters List</h2>
-            </div>
-
-            <div className="col-md-11">
-              <Link to="/chapters/create" className="btn btn-outline-warning float-right">
-                + Add New Chapter
-              </Link>
-              <br />
-              <br />
-              <hr />
-            </div>
-
-          </div>
-
-          <div className="list">
-                {chapterList}
-          </div>
-        </div>
-      </div>
+  const fetchData = async () => {
+    const response = await axios.get("/geeta/chapters"
     );
-  }
+
+    setChapters(response.data);
+  };
+
+  return (
+    <div className="Chapters">
+      <h1>Game of Thrones Books</h1>
+      <h2>Fetch a list from an API and display it</h2>
+
+      {/* Fetch data from API */}
+      <div>
+        <button className="fetch-button" onClick={fetchData}>
+          Fetch Data
+        </button>
+        <br />
+      </div>
+
+      {/* Display data from API */}
+      <div className="chapterss">
+        {chapters &&
+          chapters.map((chapter, index) => {
+
+            return (
+              <div className="book" key={index}>
+                <ChapterCard chapter={chapter} key={index} />
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
 }
 
 export default Chapters;
