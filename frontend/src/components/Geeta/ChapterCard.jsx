@@ -10,26 +10,33 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   border: none;
-  border-radius: 4px;
  
   text-align: center;
   background-color: #ffb900;
   position: relative;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 20px;
+  margin: 3px;
   width: 20%;
   padding: 20px;
   padding-right: ${remy(15)};
   padding-left: ${remy(15)};
+  height:400px
   
   img {
     max-width: 100%;
     height: auto;
   }
   @media (max-width: 768px) {
-    width: 60%;
-    height: 180px;
+    width: 44%;
+    height: 200px;
     font-size: 14px;
+
+    h2 {
+      font-size: 21px;
+    }
+    h3 {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -41,7 +48,7 @@ const ChapterCard = (props) => {
         <Card  >
             <div >
                 <h2 >
-                    <Link to={`/show-chapter/${chapter._id}`}>
+                    <Link to={`/chapters/${chapter._id}`}>
                         { chapter.chapter_name }
                     </Link>
                 </h2>
