@@ -6,6 +6,7 @@ import Chapters from './Geeta/Chapters';
 import CreateChapterForm from './Geeta/Form/CreateChapterForm'
 import CreateVerseForm from './Geeta/Form/CreateVerseForm';
 import Verses from './Geeta/Verses';
+import VerseDetails from './Geeta/VerseDetails';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/chapters/create" component={CreateChapterForm} />
           <Route exact path="/verse/create" component={CreateVerseForm} />
           <Route exact path="/chapters/:id"  component={Verses} />
+          <Route exact path="/verses/:id" component={VerseDetails} />
         </Switch>
       </div>
     </Router>

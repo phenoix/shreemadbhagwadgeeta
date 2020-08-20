@@ -17,9 +17,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 const connectMongoDB = require('./config');
 connectMongoDB();
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/geeta', geetaRouter);  
+
+//app.use('/', indexRouter);
+// Add code for Heroku . When someone reaches the root "/", send Index.html of the react
+app.use(express.static('frontend/build'));
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
+});
+
 
 
 module.exports = app;

@@ -51,9 +51,7 @@ class Chapters extends Component {
             <Link to="/chapters/create" className="btn btn-outline-warning float-right">
                 + नया अध्याय जोड़ें 
               </Link>
-              <Link to="/verse/create" className="btn btn-outline-warning float-right">
-                + नया श्लोक  जोड़ें 
-              </Link>
+              
               <br />
               <br />
               <hr />

@@ -8,9 +8,18 @@ exports.verse_list = function(req, res) {
 };
 
 // Display detail page for a specific verse.
-exports.verse_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: verse detail: ' + req.params.id);
+exports.verse_detail = function(req, res, next) {
+    console.log(req.params.id);
+    Verse.findById(req.params.id)
+    .exec(function (err, verse_details) {
+      if (err) { return next(err); }
+      //Successful, so return
+      console.log(verse_details);
+      return res.json(verse_details);
+    });
 };
+
+
 
 // Display verse create form on GET.
 exports.verse_create_get = function(req, res) {
