@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const remy = px => `${px / 16}rem`;
+const remy = (px) => `${px / 16}rem`;
 
 const Card = styled.div`
   display: inline-flex;
@@ -10,7 +10,7 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   border: none;
- 
+
   text-align: center;
   background-color: #ffb900;
   position: relative;
@@ -20,8 +20,9 @@ const Card = styled.div`
   padding: 20px;
   padding-right: ${remy(15)};
   padding-left: ${remy(15)};
-  height:400px
-  
+  height: 400px;
+  font-family: "Eczar", serif;
+
   img {
     max-width: 100%;
     height: auto;
@@ -40,23 +41,20 @@ const Card = styled.div`
   }
 `;
 
-
 const ChapterCard = (props) => {
-    const  chapter  = props.chapter;
+  const chapter = props.chapter;
 
-    return(
-        <Card  >
-            <div >
-                <h2 >
-                    <Link to={`/chapters/${chapter._id}`}>
-                        { chapter.chapter_name }
-                    </Link>
-                </h2>
-                <h3>{chapter.chapter_number}</h3>
-                <p >{chapter.chapter_summary}</p>
-            </div>
-        </Card>
-    )
+  return (
+    <Card>
+      <div>
+        <h2>
+          <Link to={`/chapters/${chapter._id}`}>{chapter.chapter_name}</Link>
+        </h2>
+        <h3>{chapter.chapter_number}</h3>
+        <p>{chapter.chapter_summary}</p>
+      </div>
+    </Card>
+  );
 };
 
 export default ChapterCard;

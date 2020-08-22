@@ -1,8 +1,17 @@
 import React, { Component } from "react";
-
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import VerseCard from "./VerseCard";
+
+const ChapterDetails = styled.div`
+  font-family: "Eczar", serif;
+  text-align: center;
+  h1 {
+    font-family: "Amita", cursive;
+    color: #f76707;
+  }
+`;
 
 export class Verses extends Component {
   constructor(props) {
@@ -50,14 +59,14 @@ export class Verses extends Component {
           >
             + नया श्लोक जोड़ें
           </Link>
-          <br />
+          <br /> <br /> <br />
         </div>
-        <div className="Chapter details ">
-          <h2> <i> {chapter.chapter_name} </i></h2>
+        <ChapterDetails className="Chapter details ">
+          <h1>{chapter.chapter_name}</h1>
           <h3> {chapter.chapter_number}</h3>
-          <h4> {chapter.chapter_name_meaning}</h4>
-          <h5> {chapter.chapter_summary} </h5>
-        </div>
+          <h5> {chapter.chapter_name_meaning}</h5>
+          <h6> {chapter.chapter_summary} </h6>
+        </ChapterDetails>
         <div className="list">{verseList}</div>
       </div>
     );
